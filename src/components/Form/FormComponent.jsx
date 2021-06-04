@@ -1,14 +1,28 @@
 import React from 'react';
 import Input from '../Input/InputComponent';
 import Button from '../Button/ButtonComponent';
-import { Link } from 'react-router-dom';
+import { Link, useHistory } from 'react-router-dom';
 import './FormStyles.scss';
+import { useForm } from './hooks';
+import ErrorInfo from '../ErrorInfo/ErrorInfo';
 
 function Form({ login }) {
-    console.log(login);
+    const history = useHistory();
+    const initialState = {
+        email: '',
+        password: '',
+    };
+
+    const { error, onChange, onSubmit } = useForm(callback, initialState);
+
+    function callback() {
+        history.push('/dashboard');
+    }
+
     return (
         <div className="form-container">
-            <form onSubmit={'hehe'}>
+            <form onSubmit={onSubmit}>
+                {error ? <ErrorInfo text={error} /> : null}
                 <div className="form-content">
                     <h1>{login ? 'Login' : 'Register'}</h1>
                     <div className="form-input">
@@ -17,12 +31,14 @@ function Form({ login }) {
                             name="email"
                             type="text"
                             placeholder="email"
+                            onChange={onChange}
                         />
                         <Input
                             label="Password"
                             name="password"
                             type="password"
                             placeholder="password"
+                            onChange={onChange}
                         />
                         <div className="submit-button">
                             <Button

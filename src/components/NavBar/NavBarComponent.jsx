@@ -14,7 +14,12 @@ function NavBar({ page }) {
                 </div>
                 <div className="tab login">
                     {page === 'login' ? null : page === 'dashboard' ? (
-                        <Link to="/">Log Out</Link>
+                        <Link
+                            to="/"
+                            onClick={() => localStorage.removeItem('token')}
+                        >
+                            Log Out
+                        </Link>
                     ) : (
                         <Link to="/login">Log In</Link>
                     )}

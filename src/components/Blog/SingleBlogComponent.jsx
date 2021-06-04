@@ -13,7 +13,7 @@ function SingleBlog({ blog }) {
         <div
             className="card"
             onClick={() => {
-                history.push('/' + blog._id);
+                history.push('/blogs/' + blog._id);
             }}
         >
             <h2 className="title">{blog.title}</h2>

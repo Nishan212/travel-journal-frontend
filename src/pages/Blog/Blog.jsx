@@ -4,6 +4,7 @@ import Details from '../../components/Details/DetailsComponent';
 import NavBar from '../../components/NavBar/NavBarComponent';
 import ErrorInfo from '../../components/ErrorInfo/ErrorInfo';
 import './BlogStyles.scss';
+import Loading from '../../components/Loading/LoadingComponent';
 
 function Blog({ match }) {
     const { id } = match.params;
@@ -13,9 +14,22 @@ function Blog({ match }) {
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
+        const token = localStorage.getItem('token');
+
         try {
+            const options = token
+                ? {
+                      headers: {
+                          'Content-type': 'application/json',
+                          Authorization: `Bearer ${token}`,
+                      },
+                  }
+                : null;
+
+            console.log(options);
             const result = await axios.get(
-                process.env.REACT_APP_BASE_URI + 'blogs/' + id
+                process.env.REACT_APP_BASE_URI + 'blogs/' + id,
+                options
             );
             console.log(result.data);
 
@@ -25,8 +39,7 @@ function Blog({ match }) {
                 setError(null);
             }
         } catch (err) {
-            console.log(err);
-            setError(err.message);
+            setError(err.response.data.error);
         }
     }, [id]);
 
@@ -34,7 +47,7 @@ function Blog({ match }) {
         <>
             <NavBar />
             <div className="blog-container">
-                {blog ? <Details blog={blog} /> : 'Loading'}
+                {blog ? <Details blog={blog} /> : <Loading />}
                 {error ? <ErrorInfo text={error} /> : null}
             </div>
         </>

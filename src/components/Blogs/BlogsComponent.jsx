@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react';
 import SingleBlog from '../Blog/SingleBlogComponent';
 import './BlogsStyles.scss';
 import ErrorInfo from '../ErrorInfo/ErrorInfo';
+import Loading from '../Loading/LoadingComponent';
 
 function Blogs({ home }) {
     const [blogs, setBlogs] = useState();
@@ -36,17 +37,24 @@ function Blogs({ home }) {
                 setError(null);
             }
         } catch (err) {
-            setError(err.message);
+            console.log('okay wait', err.response.data.error);
+            setError(err.message ?? err.response.data.error);
         }
     }, [home]);
 
     return (
         <div className="blogs">
-            {blogs?.length !== 0
-                ? blogs?.map((blog) => (
-                      <SingleBlog blog={blog} key={blog._id} />
-                  ))
-                : 'No blogs to display :('}
+            {blogs ? (
+                blogs?.length !== 0 ? (
+                    blogs?.map((blog) => (
+                        <SingleBlog blog={blog} key={blog._id} />
+                    ))
+                ) : (
+                    'No blogs to display :('
+                )
+            ) : (
+                <Loading />
+            )}
             {error ? <ErrorInfo text={error} /> : null}
         </div>
     );

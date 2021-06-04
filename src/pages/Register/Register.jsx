@@ -5,7 +5,7 @@ import Form from '../../components/Form/FormComponent';
 function Register() {
     return (
         <>
-            <NavBar page="register" />
+            <NavBar />
             <div className="login-container">
                 <Form />
             </div>

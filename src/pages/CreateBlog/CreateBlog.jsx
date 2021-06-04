@@ -5,7 +5,7 @@ import NavBar from '../../components/NavBar/NavBarComponent';
 function CreateBlog() {
     return (
         <div>
-            <NavBar page="cerateblog" />
+            <NavBar />
             <CreateBlogForm />
         </div>
     );

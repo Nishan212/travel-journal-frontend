@@ -1,8 +1,14 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
 import './NavBarStyles.scss';
+import UserContext from '../../context/context';
 
-function NavBar({ page }) {
+function NavBar({ login }) {
+    const { userData, setUserData } = useContext(UserContext);
+    console.log(userData);
+
+    const { isLoggedIn } = userData;
+
     return (
         <nav className="navbar">
             <div className="title">
@@ -13,16 +19,24 @@ function NavBar({ page }) {
                     <Link to="/map">Map</Link>
                 </div>
                 <div className="tab login">
-                    {page === 'login' ? null : page === 'dashboard' ? (
-                        <Link
-                            to="/"
-                            onClick={() => localStorage.removeItem('token')}
-                        >
-                            Log Out
-                        </Link>
-                    ) : (
-                        <Link to="/login">Log In</Link>
-                    )}
+                    {!login &&
+                        (isLoggedIn ? (
+                            <Link
+                                to="/"
+                                onClick={() => {
+                                    localStorage.removeItem('token');
+                                    setUserData({
+                                        isLoggedIn: false,
+                                        name: null,
+                                        email: null,
+                                    });
+                                }}
+                            >
+                                Log Out
+                            </Link>
+                        ) : (
+                            <Link to="/login">Log In</Link>
+                        ))}
                 </div>
             </div>
         </nav>

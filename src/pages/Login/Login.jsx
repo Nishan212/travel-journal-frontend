@@ -6,7 +6,7 @@ import './LoginStyles.scss';
 function Login() {
     return (
         <>
-            <NavBar page="login" />
+            <NavBar login />
             <div className="login-container">
                 <Form login />
             </div>

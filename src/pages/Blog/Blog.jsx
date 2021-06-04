@@ -32,7 +32,7 @@ function Blog({ match }) {
 
     return (
         <>
-            <NavBar page="blog" />
+            <NavBar />
             <div className="blog-container">
                 {blog ? <Details blog={blog} /> : 'Loading'}
                 {error ? <ErrorInfo text={error} /> : null}

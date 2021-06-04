@@ -1,16 +1,14 @@
 import axios from 'axios';
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import SingleBlog from '../Blog/SingleBlogComponent';
 import './BlogsStyles.scss';
 import ErrorInfo from '../ErrorInfo/ErrorInfo';
-import UserContext from '../../context/context';
 
 const api_uri = 'http://localhost:3000/api/';
 
 function Blogs({ home }) {
     const [blogs, setBlogs] = useState();
     const [error, setError] = useState();
-    const { userData } = useContext(UserContext);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {

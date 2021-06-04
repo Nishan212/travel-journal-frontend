@@ -10,7 +10,7 @@ function DashBoard() {
 
     return (
         <div>
-            <NavBar page="dashboard" />
+            <NavBar />
             <h1 className="dash-title">My Blogs</h1>
             <div className="create-blog">
                 <Button

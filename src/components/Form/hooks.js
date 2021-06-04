@@ -4,9 +4,10 @@ import UserContext from '../../context/context';
 
 const api_uri = 'http://localhost:3000/api/';
 
-export const useForm = (callback, initialState = {}) => {
+export const useForm = (callback, login, initialState = {}) => {
     const [values, setValues] = useState(initialState);
     const [error, setError] = useState(null);
+    const [success, setSuccess] = useState(null);
     const { userData, setUserData } = useContext(UserContext);
 
     const onChange = (event) => {
@@ -19,41 +20,68 @@ export const useForm = (callback, initialState = {}) => {
             email: values.email,
             password: values.password,
         };
+
+        if (!login) inputData.name = values.name;
+
         console.log('submitting ', inputData);
-        axios
-            .post(api_uri + 'users/login', JSON.stringify(inputData), {
-                headers: {
-                    'Content-type': 'application/json',
-                },
-            })
-            .then((res) => {
-                console.log(res.data);
-                if (res.data.error) return setError(res.data.error);
+        if (login)
+            axios
+                .post(api_uri + 'users/login', JSON.stringify(inputData), {
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    if (res.data.error) return setError(res.data.error);
 
-                setError(null);
+                    setError(null);
+                    setSuccess('Login Successful');
 
-                const { name, email, token } = res.data;
-                localStorage.setItem('token', token);
+                    const { name, email, token } = res.data;
+                    localStorage.setItem('token', token);
 
-                setUserData({
-                    isLoggedIn: true,
-                    name: name,
-                    email: email,
+                    setUserData({
+                        isLoggedIn: true,
+                        name: name,
+                        email: email,
+                    });
+
+                    console.log('user data', userData);
+
+                    callback();
+                })
+                .catch((err) => {
+                    console.log(err);
+                    setError(err.message);
                 });
+        else
+            axios
+                .post(api_uri + 'users/register', JSON.stringify(inputData), {
+                    headers: {
+                        'Content-type': 'application/json',
+                    },
+                })
+                .then((res) => {
+                    console.log(res.data);
+                    if (res.data.error) return setError(res.data.error);
 
-                console.log('user data', userData);
+                    setError(null);
 
-                callback();
-            })
-            .catch((err) => {
-                console.log(err);
-                setError(err.message);
-            });
+                    const { success, message } = res.data;
+                    console.log(success, message);
+
+                    setSuccess(message);
+
+                    callback();
+                })
+                .catch();
     };
 
     return {
         onChange,
         onSubmit,
         error,
+        success,
     };
 };

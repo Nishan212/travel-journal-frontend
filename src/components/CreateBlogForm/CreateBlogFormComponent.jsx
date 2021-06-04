@@ -2,6 +2,7 @@ import React from 'react';
 import Button from '../Button/ButtonComponent';
 import Input from '../Input/InputComponent';
 import ErrorInfo from '../ErrorInfo/ErrorInfo';
+import SuccessInfo from '../SuccessInfo/SuccessInfo';
 import './CreateBlogStyles.scss';
 import { useForm } from './hooks';
 
@@ -14,10 +15,15 @@ function CreateBlogForm() {
         location: null,
     };
 
-    const { error, onChange, onSubmit, onClick } = useForm(
-        callback,
-        initialState
-    );
+    const {
+        error,
+        success,
+        onChange,
+        onFileChange,
+        onFileSubmit,
+        onSubmit,
+        onClick,
+    } = useForm(callback, initialState);
 
     function callback() {}
 
@@ -25,8 +31,9 @@ function CreateBlogForm() {
         <div className="create-blog-container">
             <form className="blog-form" onSubmit={onSubmit}>
                 {error && <ErrorInfo text={error} />}
+                {success && <SuccessInfo text={success} />}
+                <h1>Create Blog</h1>
                 <div className="form-content">
-                    <h1>Create Blog</h1>
                     <div className="form-input">
                         <Input
                             label="Title"
@@ -69,7 +76,12 @@ function CreateBlogForm() {
                                 />
                             </div>
                         </div>
-
+                        <Input
+                            type="file"
+                            name="images"
+                            id="images"
+                            onChange={onFileChange}
+                        />
                         <div className="submit-button">
                             <Button text="Create Blog" type="submit" />
                         </div>

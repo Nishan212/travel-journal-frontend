@@ -5,27 +5,44 @@ import { Link, useHistory } from 'react-router-dom';
 import './FormStyles.scss';
 import { useForm } from './hooks';
 import ErrorInfo from '../ErrorInfo/ErrorInfo';
+import SuccessInfo from '../SuccessInfo/SuccessInfo';
 
 function Form({ login }) {
     const history = useHistory();
     const initialState = {
+        name: '',
         email: '',
         password: '',
     };
 
-    const { error, onChange, onSubmit } = useForm(callback, initialState);
+    const { error, success, onChange, onSubmit } = useForm(
+        callback,
+        login,
+        initialState
+    );
 
     function callback() {
-        history.push('/dashboard');
+        if (login) history.push('/dashboard');
+        else history.push('/login');
     }
 
     return (
         <div className="form-container">
-            <form onSubmit={onSubmit}>
-                {error ? <ErrorInfo text={error} /> : null}
+            <form id="login-form" onSubmit={onSubmit}>
+                {error && <ErrorInfo text={error} />}
+                {success && <SuccessInfo text={success} />}
                 <div className="form-content">
                     <h1>{login ? 'Login' : 'Register'}</h1>
                     <div className="form-input">
+                        {!login && (
+                            <Input
+                                label="Name"
+                                name="name"
+                                type="text"
+                                placeholder="name"
+                                onChange={onChange}
+                            />
+                        )}
                         <Input
                             label="Email"
                             name="email"
@@ -46,12 +63,12 @@ function Form({ login }) {
                                 type="submit"
                             />
                         </div>
-                        {login ? (
+                        {login && (
                             <div className="ask-register">
                                 <span>Not a member?</span>
                                 <Link to="/register"> Register</Link>
                             </div>
-                        ) : null}
+                        )}
                     </div>
                 </div>
             </form>

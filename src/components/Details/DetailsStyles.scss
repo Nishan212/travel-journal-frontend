@@ -1,0 +1,26 @@
+.details-card {
+    width: 80%;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border-radius: 0.5rem;
+
+    .details-image {
+        overflow: hidden;
+        display: flex;
+        img {
+            max-width: 500px;
+            max-height: 500px;
+            margin-bottom: 30px;
+            border-radius: 0.5rem;
+            padding: 2px;
+        }
+    }
+
+    .details-author {
+        margin-top: 20px;
+    }
+}

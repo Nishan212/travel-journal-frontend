@@ -1,0 +1,52 @@
+body {
+    overflow: auto;
+}
+
+.card {
+    width: 50%;
+    cursor: pointer;
+    display: flex;
+    flex-direction: column;
+    margin: 20px;
+    padding: 10px;
+    justify-content: center;
+    align-items: center;
+    border: 1px solid lightgrey;
+    border-radius: 0.5rem;
+}
+
+.title {
+    margin-bottom: 0%;
+}
+
+.date {
+    margin-bottom: 20px;
+    color: rgb(160, 159, 159);
+}
+
+.image {
+    display: flex;
+    overflow: hidden;
+    img {
+        max-width: 400px;
+        max-height: 200px;
+        overflow: hidden;
+        margin-bottom: 10px;
+        border-radius: 0.5rem;
+        padding: 2px;
+    }
+}
+
+.content {
+    color: rgb(73, 73, 73);
+    margin-bottom: 10px;
+    width: 90%;
+    text-align: center;
+}
+
+.author {
+    color: rgb(148, 148, 148);
+    width: 90%;
+    padding-right: 0%;
+    text-align: right;
+}

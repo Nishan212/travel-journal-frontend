@@ -1,0 +1,26 @@
+.navbar {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    background-color: rgb(193, 229, 236);
+    a {
+        text-decoration: none;
+        color: black;
+        padding: 5px 15px;
+        border-radius: 0.25rem;
+    }
+}
+
+.tabs {
+    display: flex;
+    width: 20%;
+    align-items: center;
+    justify-content: space-around;
+    a {
+        text-decoration: none;
+        color: black;
+        padding: 5px 15px;
+        background-color: rgb(222, 245, 248);
+        border-radius: 0.25rem;
+    }
+}

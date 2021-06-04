@@ -31,7 +31,7 @@ function SingleBlog({ blog }) {
                     date.getFullYear()}
             </div>
             <div className="image">
-                {blog.images.map((image) => (
+                {blog.images?.map((image) => (
                     <img
                         key={image}
                         src={api_uri + 'send/' + image}

@@ -6,6 +6,7 @@ import Blog from './pages/Blog/Blog';
 import DashBoard from './pages/DashBoard/DashBoard';
 import UserContext from './context/context';
 import { useState } from 'react';
+import CreateBlog from './pages/CreateBlog/CreateBlog';
 
 function App() {
     const [userData, setUserData] = useState({
@@ -22,6 +23,11 @@ function App() {
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/dashboard" component={DashBoard} />
+                        <Route
+                            exact
+                            path="/createblog"
+                            component={CreateBlog}
+                        />
                         <Route exact path="/blogs/:id" component={Blog} />
                     </UserContext.Provider>
                 </Switch>

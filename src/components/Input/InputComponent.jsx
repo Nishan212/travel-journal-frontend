@@ -4,15 +4,26 @@ import './InputStyles.scss';
 function Input({ label, placeholder, name, type, onChange }) {
     return (
         <div className="input-container">
-            <label className="label" for={name}>
+            <label className="label" htmlFor={name}>
                 {label}
             </label>
-            <input
-                onChange={onChange}
-                name={name}
-                type={type}
-                placeholder={placeholder}
-            />
+            {type === 'textarea' ? (
+                <textarea
+                    name={name}
+                    id={name}
+                    onChange={onChange}
+                    placeholder={placeholder}
+                    cols="30"
+                    rows="10"
+                />
+            ) : (
+                <input
+                    onChange={onChange}
+                    name={name}
+                    type={type}
+                    placeholder={placeholder}
+                />
+            )}
         </div>
     );
 }

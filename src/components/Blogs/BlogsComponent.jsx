@@ -1,19 +1,31 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SingleBlog from '../Blog/SingleBlogComponent';
 import './BlogsStyles.scss';
 import ErrorInfo from '../ErrorInfo/ErrorInfo';
+import UserContext from '../../context/context';
 
 const api_uri = 'http://localhost:3000/api/';
 
-function Blogs() {
+function Blogs({ home }) {
     const [blogs, setBlogs] = useState();
     const [error, setError] = useState();
+    const { userData } = useContext(UserContext);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         try {
-            const result = await axios.get(api_uri + 'blogs');
+            let result;
+            if (home) result = await axios.get(api_uri + 'blogs');
+            else {
+                const token = localStorage.getItem('token');
+                result = await axios.get(api_uri + 'blogs/private', {
+                    headers: {
+                        'Content-type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                });
+            }
             console.log(result.data);
 
             if (result.data.error) setError(result.data.error);
@@ -24,7 +36,7 @@ function Blogs() {
         } catch (err) {
             setError(err.message);
         }
-    }, []);
+    }, [home]);
 
     return (
         <div className="blogs">

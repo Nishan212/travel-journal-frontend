@@ -4,8 +4,6 @@ import SingleBlog from '../Blog/SingleBlogComponent';
 import './BlogsStyles.scss';
 import ErrorInfo from '../ErrorInfo/ErrorInfo';
 
-const api_uri = 'http://localhost:3000/api/';
-
 function Blogs({ home }) {
     const [blogs, setBlogs] = useState();
     const [error, setError] = useState();
@@ -14,15 +12,21 @@ function Blogs({ home }) {
     useEffect(async () => {
         try {
             let result;
-            if (home) result = await axios.get(api_uri + 'blogs');
+            if (home)
+                result = await axios.get(
+                    process.env.REACT_APP_BASE_URI + 'blogs'
+                );
             else {
                 const token = localStorage.getItem('token');
-                result = await axios.get(api_uri + 'blogs/private', {
-                    headers: {
-                        'Content-type': 'application/json',
-                        Authorization: `Bearer ${token}`,
-                    },
-                });
+                result = await axios.get(
+                    process.env.REACT_APP_BASE_URI + 'blogs/private',
+                    {
+                        headers: {
+                            'Content-type': 'application/json',
+                            Authorization: `Bearer ${token}`,
+                        },
+                    }
+                );
             }
             console.log(result.data);
 

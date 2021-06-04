@@ -1,8 +1,6 @@
 import React from 'react';
 import './DetailsStyles.scss';
 
-const api_uri = 'http://localhost:3000/api/';
-
 function Details({ blog }) {
     const date = new Date(blog.updatedAt);
     return (
@@ -22,13 +20,16 @@ function Details({ blog }) {
                     date.getFullYear()}
             </div>
             <div className="details-image">
-                {blog.images.map((image) => (
-                    <img
-                        key={image}
-                        src={api_uri + 'send/' + image}
-                        alt={image}
-                    />
-                ))}
+                {blog.images &&
+                    blog.images.map((image) => (
+                        <img
+                            key={image}
+                            src={
+                                process.env.REACT_APP_BASE_URI + 'send/' + image
+                            }
+                            alt={image}
+                        />
+                    ))}
             </div>
             <div className="content">{blog.body}</div>
             <div className="author details-author">~ {blog.user.name}</div>

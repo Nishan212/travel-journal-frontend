@@ -5,8 +5,6 @@ import NavBar from '../../components/NavBar/NavBarComponent';
 import ErrorInfo from '../../components/ErrorInfo/ErrorInfo';
 import './BlogStyles.scss';
 
-const api_uri = 'http://localhost:3000/api/';
-
 function Blog({ match }) {
     const { id } = match.params;
 
@@ -16,7 +14,9 @@ function Blog({ match }) {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
         try {
-            const result = await axios.get(api_uri + 'blogs/' + id);
+            const result = await axios.get(
+                process.env.REACT_APP_BASE_URI + 'blogs/' + id
+            );
             console.log(result.data);
 
             if (result.data.error) setError(result.data.error);

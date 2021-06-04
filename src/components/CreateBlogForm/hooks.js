@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import axios from 'axios';
 
-const api_uri = 'http://localhost:3000/api/';
-
 export const useForm = (callback, initialState = {}) => {
     const [values, setValues] = useState(initialState);
     const [error, setError] = useState();
@@ -34,12 +32,16 @@ export const useForm = (callback, initialState = {}) => {
 
         const token = localStorage.getItem('token');
         axios
-            .post(api_uri + 'blogs', JSON.stringify(inputData), {
-                headers: {
-                    'Content-type': 'application/json',
-                    Authorization: `Bearer ${token}`,
-                },
-            })
+            .post(
+                process.env.REACT_APP_BASE_URI + 'blogs',
+                JSON.stringify(inputData),
+                {
+                    headers: {
+                        'Content-type': 'application/json',
+                        Authorization: `Bearer ${token}`,
+                    },
+                }
+            )
             .then((res) => {
                 console.log(res.data);
                 if (res.data.error) return setError(res.data.error);

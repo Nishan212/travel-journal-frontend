@@ -2,8 +2,6 @@ import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './SingleBlogStyles.scss';
 
-const api_uri = 'http://localhost:3000/api/';
-
 function SingleBlog({ blog }) {
     const history = useHistory();
     const date = new Date(blog.updatedAt);
@@ -34,7 +32,7 @@ function SingleBlog({ blog }) {
                 {blog.images?.map((image) => (
                     <img
                         key={image}
-                        src={api_uri + 'send/' + image}
+                        src={process.env.REACT_APP_BASE_URI + 'send/' + image}
                         alt={image}
                     />
                 ))}

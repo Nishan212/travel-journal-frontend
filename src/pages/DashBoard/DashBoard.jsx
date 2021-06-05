@@ -2,13 +2,9 @@ import React from 'react';
 import NavBar from '../../components/NavBar/NavBarComponent';
 import './DashStyles.scss';
 import Blogs from '../../components/Blogs/BlogsComponent';
-import Button from '../../components/Button/ButtonComponent';
 import { Link } from 'react-router-dom';
-import { useHistory } from 'react-router';
 
 function DashBoard() {
-    const history = useHistory();
-
     return (
         <div>
             <NavBar />

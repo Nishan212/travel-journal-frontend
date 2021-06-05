@@ -6,7 +6,7 @@ function CreateBlog({ location }) {
     return (
         <div>
             <NavBar />
-            <CreateBlogForm images={location.images} />
+            <CreateBlogForm data={location.data} />
         </div>
     );
 }

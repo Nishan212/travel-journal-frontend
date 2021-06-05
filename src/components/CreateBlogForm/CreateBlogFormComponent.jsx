@@ -8,12 +8,13 @@ import { useForm } from './hooks';
 import { Link } from 'react-router-dom';
 
 function CreateBlogForm({ data }) {
-    if (data) console.log('broo yayyya', data.fileNames);
+    // if (images) console.log('images', images.fileNames);
+
     const initialState = {
         public: false,
         title: null,
         body: null,
-        images: null,
+        images: data?.fileNames,
         location: null,
     };
 
@@ -77,11 +78,11 @@ function CreateBlogForm({ data }) {
                             <Link
                                 to={{
                                     pathname: '/upload',
-                                    images: ['passing this'],
                                 }}
                             >
                                 Upload Images
                             </Link>
+                            <span>{data?.fileNames}</span>
                         </div>
                         <div className="submit-button">
                             <Button text="Create Blog" type="submit" />

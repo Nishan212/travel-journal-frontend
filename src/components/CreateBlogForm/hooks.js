@@ -5,6 +5,7 @@ export const useForm = (callback, initialState = {}) => {
     const [values, setValues] = useState(initialState);
     const [error, setError] = useState();
     const [success, setSuccess] = useState();
+
     const onChange = (event) => {
         setValues({ ...values, [event.target.name]: event.target.value });
     };
@@ -20,7 +21,7 @@ export const useForm = (callback, initialState = {}) => {
             public: values.public === 'yes' ?? false,
             title: values.title,
             body: values.body,
-            images: null,
+            images: initialState.images,
             location: values.location,
         };
         console.log('submitting ', inputData);
@@ -50,7 +51,7 @@ export const useForm = (callback, initialState = {}) => {
             })
             .catch((err) => {
                 console.log(err);
-                setError(err.message ?? err.response.data.error);
+                setError(err.response.data.error ?? err.message);
             });
     };
 

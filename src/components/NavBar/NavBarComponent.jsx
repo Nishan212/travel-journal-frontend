@@ -5,8 +5,6 @@ import UserContext from '../../context/context';
 
 function NavBar({ login }) {
     const { userData, setUserData } = useContext(UserContext);
-    console.log(userData);
-
     const { isLoggedIn } = userData;
 
     return (

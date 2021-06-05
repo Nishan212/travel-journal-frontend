@@ -1,13 +1,16 @@
 import axios from 'axios';
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import SingleBlog from '../Blog/SingleBlogComponent';
 import './BlogsStyles.scss';
 import ErrorInfo from '../ErrorInfo/ErrorInfo';
 import Loading from '../Loading/LoadingComponent';
+import { Link } from 'react-router-dom';
+import UserConext from '../../context/context';
 
 function Blogs({ home }) {
     const [blogs, setBlogs] = useState();
     const [error, setError] = useState();
+    const { userData } = useContext(UserConext);
 
     // eslint-disable-next-line react-hooks/exhaustive-deps
     useEffect(async () => {
@@ -43,20 +46,27 @@ function Blogs({ home }) {
     }, [home]);
 
     return (
-        <div className="blogs">
-            {blogs ? (
-                blogs?.length !== 0 ? (
-                    blogs?.map((blog) => (
-                        <SingleBlog blog={blog} key={blog._id} />
-                    ))
+        <>
+            <div className="my-blogs-button">
+                {home && userData.isLoggedIn ? (
+                    <Link to="/dashboard">My Blogs</Link>
+                ) : null}
+            </div>
+            <div className="blogs">
+                {blogs ? (
+                    blogs?.length !== 0 ? (
+                        blogs?.map((blog) => (
+                            <SingleBlog blog={blog} key={blog._id} />
+                        ))
+                    ) : (
+                        'No blogs to display :('
+                    )
                 ) : (
-                    'No blogs to display :('
-                )
-            ) : (
-                <Loading />
-            )}
-            {error ? <ErrorInfo text={error} /> : null}
-        </div>
+                    <Loading />
+                )}
+                {error ? <ErrorInfo text={error} /> : null}
+            </div>
+        </>
     );
 }
 

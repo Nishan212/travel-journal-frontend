@@ -4,5 +4,12 @@
 
 .create-blog {
     text-align: right;
-    margin: 20px;
+    margin: 20px 15% 0 0;
+    a {
+        text-decoration: none;
+        color: black;
+        padding: 5px 15px;
+        background-color: rgb(222, 245, 248);
+        border-radius: 0.25rem;
+    }
 }

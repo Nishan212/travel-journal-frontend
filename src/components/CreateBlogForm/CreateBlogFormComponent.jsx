@@ -5,8 +5,10 @@ import ErrorInfo from '../ErrorInfo/ErrorInfo';
 import SuccessInfo from '../SuccessInfo/SuccessInfo';
 import './CreateBlogStyles.scss';
 import { useForm } from './hooks';
+import { Link } from 'react-router-dom';
 
-function CreateBlogForm() {
+function CreateBlogForm({ data }) {
+    if (data) console.log('broo yayyya', data.fileNames);
     const initialState = {
         public: false,
         title: null,
@@ -15,15 +17,10 @@ function CreateBlogForm() {
         location: null,
     };
 
-    const {
-        error,
-        success,
-        onChange,
-        onFileChange,
-        onFileSubmit,
-        onSubmit,
-        onClick,
-    } = useForm(callback, initialState);
+    const { error, success, onChange, onSubmit, onClick } = useForm(
+        callback,
+        initialState
+    );
 
     function callback() {}
 
@@ -76,12 +73,16 @@ function CreateBlogForm() {
                                 />
                             </div>
                         </div>
-                        <Input
-                            type="file"
-                            name="images"
-                            id="images"
-                            onChange={onFileChange}
-                        />
+                        <div className="upload-link">
+                            <Link
+                                to={{
+                                    pathname: '/upload',
+                                    images: ['passing this'],
+                                }}
+                            >
+                                Upload Images
+                            </Link>
+                        </div>
                         <div className="submit-button">
                             <Button text="Create Blog" type="submit" />
                         </div>

@@ -20,6 +20,7 @@ function Input({ label, placeholder, name, type, onChange }) {
                 <input
                     onChange={onChange}
                     name={name}
+                    id={name}
                     type={type}
                     placeholder={placeholder}
                 />

@@ -12,4 +12,16 @@
     justify-content: space-around;
     font-size: 1.2rem;
     color: #4d4d4d;
+    margin-bottom: 1.25em;
+}
+
+.upload-link {
+    a {
+        margin: auto;
+        text-decoration: none;
+        color: #4d4d4d;
+        padding: 5px 15px;
+        background-color: rgb(222, 245, 248);
+        border-radius: 0.25rem;
+    }
 }

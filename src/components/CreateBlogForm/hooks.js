@@ -14,11 +14,6 @@ export const useForm = (callback, initialState = {}) => {
         console.log(event.target.name, values);
     };
 
-    const onFileChange = (event) => {
-        setValues({ ...values, [event.target.name]: event.target.files[0] });
-        console.log(event.target.name, values);
-    };
-
     const onSubmit = (event) => {
         event.preventDefault();
         const inputData = {
@@ -62,7 +57,6 @@ export const useForm = (callback, initialState = {}) => {
     return {
         onChange,
         onClick,
-        onFileChange,
         onSubmit,
         error,
         success,

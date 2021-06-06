@@ -1,6 +1,8 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
 import './SingleBlogStyles.scss';
+import Icon from '@iconify/react';
+import locationIcon from '@iconify/icons-mdi/location';
 
 function SingleBlog({ blog }) {
     const history = useHistory();
@@ -28,6 +30,12 @@ function SingleBlog({ blog }) {
                     ' ' +
                     date.getFullYear()}
             </div>
+            {blog.location && (
+                <div className="location-info">
+                    <Icon icon={locationIcon} />
+                    <span className="location-text">{blog.location}</span>
+                </div>
+            )}
             <div className="image">
                 {blog.images?.map((image) => (
                     <img

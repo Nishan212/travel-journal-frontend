@@ -20,8 +20,19 @@ body {
 }
 
 .date {
-    margin-bottom: 20px;
+    margin-bottom: 5px;
     color: rgb(160, 159, 159);
+}
+
+.location-info {
+    margin-bottom: 20px;
+    color: rgb(131, 130, 130);
+    font-size: 15px;
+    span {
+        position: relative;
+        top: -2px;
+        padding-left: 3px;
+    }
 }
 
 .image {

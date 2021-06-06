@@ -1,5 +1,7 @@
 import React from 'react';
 import './DetailsStyles.scss';
+import Icon from '@iconify/react';
+import locationIcon from '@iconify/icons-mdi/location';
 
 function Details({ blog }) {
     const date = new Date(blog.updatedAt);
@@ -19,6 +21,12 @@ function Details({ blog }) {
                     ' ' +
                     date.getFullYear()}
             </div>
+            {blog.location && (
+                <div className="location-info">
+                    <Icon icon={locationIcon} />
+                    <span className="location-text">{blog.location}</span>
+                </div>
+            )}
             <div className="details-image">
                 {blog.images &&
                     blog.images.map((image) => (

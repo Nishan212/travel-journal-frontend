@@ -11,7 +11,7 @@ function CreateBlogForm({ data }) {
     // if (images) console.log('images', images.fileNames);
 
     const initialState = {
-        public: false,
+        public: 'no',
         title: null,
         body: null,
         images: data?.fileNames,

@@ -8,6 +8,7 @@ import UserContext from './context/context';
 import { useState } from 'react';
 import CreateBlog from './pages/CreateBlog/CreateBlog';
 import Upload from './pages/Upload/Upload';
+import Map from './pages/Map/MapPage';
 
 function App() {
     const [userData, setUserData] = useState({
@@ -24,6 +25,7 @@ function App() {
                         <Route exact path="/login" component={Login} />
                         <Route exact path="/register" component={Register} />
                         <Route exact path="/dashboard" component={DashBoard} />
+                        <Route exact path="/map" component={Map} />
                         <Route
                             exact
                             path="/createblog"
